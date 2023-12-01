@@ -1,0 +1,134 @@
+@startuml
+skin rose
+left to right direction
+
+Package Modules{
+Package Cofres{
+Class Cofre{
+- ID: String
+- fechaFinal: long
+- Tipo: String
++ Cofre(ID: String, fechaFinal: long, Tipo: String)
++ getID(): String
++ getFechaFinal(): long
++ getTipo(): String
+}
+}
+
+
+Package Monstruos{
+Class Agua{
+-tipoChorro: String;
++Agua(ID: int, nombre: String, HP: int, genero: String , tipoChorro: String)
++getTipoChorro(): String
+}
+
+Class Electrico{
+-cargaAsociada: int;
+-cargaCompleta: boolean
++Electrico(ID: int, nombre: String, HP: int, genero: String, cargaAsociada: int, cargaCompleta: boolean)
++getCargaAsociada(): int;
++isCargaCompleta(): boolean;
+}
+
+Class Fuego{
+- Longitudllamarada: int
++ Fuego(ID: int, nombre: String, HP: int, genero: String,Longitudllamarada:int)
++ getLongitudllamarada(): int;
+}
+
+Class Legendario{
+- superpoder: String
++ Legendario(ID: int, nombre: String, HP: int, genero: String,superpoder: String)
++ getSuperpoder(): String
+}
+
+Class Normal{
+-Normal(ID: int, nombre: String, HP: int, genero: String)
+}
+
+Class Volador{
+-dureza: String
++Volador(ID: int, nombre: String, HP: int, genero: String, dureza: String)
++getDureza(): String
+}
+
+
+Abstract Monstruo{
+- ID: int
+- nombre : String
+- HP : int
+- genero: String
++Monstruo(ID: int, nombre: String, HP: int, genero: String )
++getID(): int
++getNombre(): String
++getHP(): int
++getGenero(): String
+}
+
+
+
+Monstruo <|-- Agua
+Monstruo <|-- Electrico
+Monstruo <|-- Fuego
+Monstruo <|-- Legendario
+Monstruo <|-- Normal
+Monstruo <|-- Volador
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+}
+Package Services{
+
+Interface Sistema{
++menu(): void
++opcionMenu1(): void
++opcionMenu11(): void
++opcionMenu2(): void
++opcionMenu3(): void
++verCofres(): void
++abrirCofre(): void
++nuevoCofre(): void
+}
+
+Class SistemaImpl{
++cargarArchivo(): void
++cargaArchivoDataPlayer(): void
++imprimirMenu(): void
++imprimirOpcionMenu1(): void
++imprimirOpcionMenuPaginado(): void
++imprimirOpcionMenu3(): void
++mostrarCartas(listaCartas: List<Monstruo> , paginaActual: int , cartasPorPagina: int) : void
++mostrarMisCartas(listaCartas: List<Monstruo> , paginaActual: int , cartasPorPagina: int): void
++abrircofreNormal(rango: int): void
++abrircofreplata(rango: int): void
++abrircofrediamante(rango: int): void
++obtenerCaracter(): String
++obtenerTipoCofre(): String
++guardarArchivoDataPlayer(): void
+}
+
+}
+
+SistemaImpl --> Monstruo : listaMonstruos: List<Monstruo>
+
+SistemaImpl --> Cofre:  listaCofres: List<Cofre>
+
+SistemaImpl ..|> Sistema : Implementa >
+
+
+
+
+@enduml
